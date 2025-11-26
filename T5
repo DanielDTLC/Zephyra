@@ -1,0 +1,24 @@
+
+from collections import Counter
+from typing import List, Dict
+from T2 import Clima
+
+def consenso(lecturas: List[Dict], ciudad: str, dia: int = 1) -> Clima:
+    if not lecturas:
+        return Clima(dia, ciudad, "nublado", 0.0, 0.0)
+    
+    temps = [l['temperatura'] for l in lecturas if 'temperatura' in l]
+    hums = [l['humedad'] for l in lecturas if 'humedad' in l]
+    estados = [l['estado'] for l in lecturas if 'estado' in l]
+    
+    avg_temp = sum(temps) / len(temps) if temps else 0.0
+    avg_hum = sum(hums) / len(hums) if hums else 0.0
+    most_estado = Counter(estados).most_common(1)[0][0] if estados else "nublado"
+    
+    return Clima(
+        dia=dia,
+        ciudad=ciudad,
+        estado=most_estado,
+        temperatura=round(avg_temp, 2),
+        humedad=round(avg_hum, 2)
+    )
