@@ -1,4 +1,4 @@
-# nucleo.py
+#-- nucleo.py
 from dataclasses import dataclass
 from typing import Literal, List, Dict
 import random
@@ -100,3 +100,4 @@ def generar_proyeccion(inicial: Clima, dias: int) -> Dict[str, float]:
     """Genera una proyección meteorológica promedio a futuro."""
     simulacion = simular_varios(inicial, dias)
     return promedio_ciudad(simulacion)
+
