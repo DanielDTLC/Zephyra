@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🌦️ Zephyra: Monitoreo Climático</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <div class="bg-animation">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <header>
+    <h1>🌍 Zephyra: Monitoreo Dinámico del Clima</h1>
+  </header>
+
+  <div class="container">
+    <!-- Panel de clima en tiempo real con animaciones -->
+    <div id="weather-effects" class="weather-effects-container"></div>
+    
+    <div id="search-panel">
+      <div class="search-wrapper">
+        <!-- Contenedor del input con autocompletado -->
+        <div class="search-container">
+          <input type="text" id="search-input" placeholder="🔍 Busca una ciudad o país..." autocomplete="off">
+          <div id="suggestions" class="suggestions-box"></div>
+        </div>
+        
+        <button onclick="buscarClima()">🔎 Buscar</button>
+        <button onclick="obtenerFavoritos()">⭐ Ver Favoritos</button>
+        <select id="favoritos-list" style="display:none;">
+          <option>Selecciona un favorito</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div id="data-panel">
+      <h2 id="ubicacion">📍 Ubicación no detectada</h2>
+      
+      <!-- Indicador de efecto climático activo -->
+      <div id="effect-indicator" style="display: none; background: rgba(102, 126, 234, 0.1); padding: 15px; border-radius: 10px; margin: 15px 0; text-align: center; font-weight: 600; color: #667eea;"></div>
+      
+      <div id="clima-actual"><div class="loading"></div> Cargando datos climáticos...</div>
+
+      <h3>📊 Fuentes de Datos</h3>
+      <table id="tabla-fuentes">
+        <thead>
+          <tr>
+            <th>Fuente</th>
+            <th>Estado</th>
+            <th>Temp °C</th>
+            <th>Humedad %</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>🎯 Consenso Actual</h3>
+      <table id="tabla-consenso">
+        <thead>
+          <tr>
+            <th>Estado</th>
+            <th>Temp °C</th>
+            <th>Humedad %</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <h3>🔮 Proyección (Promedio a 7 días)</h3>
+      <div id="proyeccion"><div class="loading"></div> Calculando proyección...</div>
+
+      <div class="action-buttons">
+        <button onclick="guardarFavorito()">💾 Guardar como Favorito</button>
+        <button onclick="verHistorico()">📈 Ver Histórico</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
